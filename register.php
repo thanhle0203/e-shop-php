@@ -61,8 +61,19 @@ if (isset($_POST['first_name'])) {
             break;
         }
 
-        //server: localhost, mysql_user: root, password: 0000, database: shop
-        $dbConnection = new mysqli("localhost", "root", "0000", "shop");
+        $hostname = "localhost";
+        $username = "root";
+        $dbname = "shop";
+        $password = "";
+
+        //server: localhost, mysql_user: root, password: , database: shop
+        $dbConnection = new mysqli($hostname, $username, $password, $dbname);
+
+        // Check connection
+        if ($dbConnection->connect_error) {
+          die("Connect Error: " . $dbConnection->connect_error);
+        }
+        echo "Connected Successfully";
 
         //Let use prepared statements to avoid "sql injection attacks"
         $statement = $dbConnection->prepare("SELECT id FROM users WHERE email = ?");

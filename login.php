@@ -14,8 +14,12 @@ if (isset($_POST['email'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    //server: localhost, mysql_user: root, password: 0000, database: shop
-    $dbConnection = new mysqli("localhost", "root", "0000", "shop");
+    $hostname = "localhost";
+    $username = "root";
+    $dbname = "shop";
+    $password = "";
+    //server: localhost, mysql_user: root, password: , database: shop
+    $dbConnection = new mysqli($hostname, $username, $password, $dbname);
 
     //Let use prepared statements to avoid "sql injection attacks"
     $statement = $dbConnection->prepare("SELECT id, first_name, last_name, phone, password, created_at FROM users WHERE email = ?");
